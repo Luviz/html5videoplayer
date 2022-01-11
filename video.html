@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+
+        display: flex;
+        justify-content: center;
+        align-content: flex-start;
+        width: 100%;
+      }
+      video {
+        height: 95vh;
+        width: min-content;
+      }
+      .inputs {
+        padding: 0.5em;
+        padding-left: 0;
+        width: 100%;
+      }
+    </style>
+    <script>
+      function setVideoSrc(url) {
+        console.log(url);
+        const vid = document.getElementById("root_video");
+        // store last watch video
+        window.localStorage.setItem("last_vid", url);
+        vid.src = url;
+      }
+
+      function onPlayBtnClick() {
+        const link = document.getElementById("link");
+        console.log(link.value);
+        setVideoSrc(link.value);
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <div class="inputs">
+        <input type="button" value="Play" onclick="onPlayBtnClick()" />
+        <input
+          type="text"
+          name="Link"
+          id="link"
+          style="width: 85vw"
+          placeholder="/home/user/videoFile"
+        />
+      </div>
+      <video id="root_video" autoplay loop preload="auto" controls></video>
+    </div>
+  </body>
+  <script>
+    lastVid = window.localStorage.getItem("last_vid");
+    setVideoSrc(lastVid);
+    const link = document.getElementById("link");
+    link.value = lastVid;
+  </script>
+</html>
